@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>AI Agents See Security</title>
+  <defs>
+    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#b1d7ff"/>
+      <stop offset=".48" stop-color="#7798ff"/>
+      <stop offset="1" stop-color="#a178ff"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#shield)" d="M32 3 57 12v17c0 13-8 23-25 32C15 52 7 42 7 29V12Z"/>
+  <path fill="#111031" d="m32 9 19 7v13c0 10-6 18-19 25-13-7-19-15-19-25V16Z"/>
+  <path fill="#f1f5ff" d="M16 30c5-6.5 10.3-10 16-10s11 3.5 16 10c-5 6.5-10.3 10-16 10s-11-3.5-16-10Z"/>
+  <circle cx="32" cy="30" r="6.5" fill="#111031"/>
+  <circle cx="34" cy="28" r="1.8" fill="#96bcff"/>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "name": "ai-agents-see-security-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Professional responsive multi-page website for AI Agents See Security.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build:services": "node scripts/build-services.mjs",
+    "build:footer": "node scripts/apply-footer.mjs",
+    "build": "npm run -s build:services && npm run -s build:footer",
+    "test": "node tests/smoke.mjs"
+  }
+}

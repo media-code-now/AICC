@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | AI Agents See Security</title>
+    <meta name="description" content="Contact AI Agents See Security with a general inquiry, or request a security assessment." />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/contact.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/security-logo.svg" width="28" height="28" alt="" /> AI Agents See Security</a>
+        <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="who-we-help.html">Who We Help</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+            <li><a class="cta cta-primary cta-small" href="security-assessment.html">Request a Security Assessment</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-header">
+        <div class="container">
+          <p class="kicker">Contact</p>
+          <h1>Talk with our team.</h1>
+          <p class="lead">Ask a question about our services, book a consultation, or discuss how we could work alongside your existing IT provider.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container narrow">
+          <div class="notice notice-strong" role="note">
+            <p><strong>Existing clients should use the support and incident-reporting channels provided in their service agreement.</strong></p>
+            <p>This general contact form is not a monitored emergency or incident-reporting channel.</p>
+          </div>
+        </div>
+
+        <div class="container contact-layout">
+          <div class="form-wrap">
+            <div id="contact-panel">
+              <h2 id="contact-form-title">General inquiry</h2>
+              <p class="form-note">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+              <div class="notice" role="note">
+                <p><strong>Please do not submit passwords, access codes, payment information, or sensitive customer data.</strong></p>
+              </div>
+
+              <div id="contact-error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+                <h3>Please correct the following:</h3>
+                <ul></ul>
+              </div>
+
+              <noscript>
+                <p class="field-error">This form requires JavaScript. Please enable it to send an inquiry.</p>
+              </noscript>
+
+              <form id="contact-form" action="/api/contact" method="post" novalidate aria-labelledby="contact-form-title">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="c-fullName">Full name <span aria-hidden="true">*</span></label>
+                    <input id="c-fullName" name="fullName" type="text" autocomplete="name" maxlength="120" required aria-describedby="c-fullName-error" />
+                    <p class="field-error" id="c-fullName-error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="c-email">Email <span aria-hidden="true">*</span></label>
+                    <input id="c-email" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="c-email-error" />
+                    <p class="field-error" id="c-email-error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="c-businessName">Business name <span class="optional">(optional)</span></label>
+                    <input id="c-businessName" name="businessName" type="text" autocomplete="organization" maxlength="160" aria-describedby="c-businessName-error" />
+                    <p class="field-error" id="c-businessName-error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="c-phone">Phone number <span class="optional">(optional)</span></label>
+                    <input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="c-phone-error" />
+                    <p class="field-error" id="c-phone-error" hidden></p>
+                  </div>
+                  <div class="full field">
+                    <label for="c-topic">What is your inquiry about? <span aria-hidden="true">*</span></label>
+                    <select id="c-topic" name="topic" required aria-describedby="c-topic-error">
+                      <option value="">Select a topic</option>
+                      <option value="services">Questions about services</option>
+                      <option value="consultation">Booking a consultation</option>
+                      <option value="assessment">Security assessment questions</option>
+                      <option value="existing-provider">Working with our existing IT provider</option>
+                      <option value="other">Something else</option>
+                    </select>
+                    <p class="field-error" id="c-topic-error" hidden></p>
+                  </div>
+                  <div class="full field">
+                    <label for="c-message">Message <span aria-hidden="true">*</span></label>
+                    <textarea id="c-message" name="message" maxlength="2000" required aria-describedby="c-message-hint c-message-error"></textarea>
+                    <p class="hint" id="c-message-hint">Maximum 2,000 characters.</p>
+                    <p class="field-error" id="c-message-error" hidden></p>
+                  </div>
+
+                  <div class="hp-field" aria-hidden="true">
+                    <label for="c-companyFax">Leave this field empty</label>
+                    <input id="c-companyFax" name="companyFax" type="text" tabindex="-1" autocomplete="off" />
+                  </div>
+                  <input type="hidden" name="formStartedAt" id="c-formStartedAt" />
+
+                  <div class="full privacy-notice">
+                    <p><strong>Privacy notice.</strong> We use the information in this form only to respond to your inquiry. We do not sell it. See our <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="cta cta-primary" type="submit" id="contact-submit">Send Inquiry</button>
+                  <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+                </div>
+              </form>
+            </div>
+
+            <div id="contact-success" class="form-success" tabindex="-1" hidden>
+              <h2>Message received</h2>
+              <p>Thank you. Your inquiry has been received, and our team will be in touch.</p>
+              <a class="cta cta-secondary-dark" href="services.html">Explore our services</a>
+            </div>
+          </div>
+
+          <aside class="contact-aside" aria-label="Other ways to reach us">
+            <div class="card">
+              <h2>Contact details</h2>
+              <dl class="contact-details">
+                <dt>Email</dt>
+                <dd>[Business email to be confirmed]</dd>
+                <dt>Phone</dt>
+                <dd>[Business phone to be confirmed]</dd>
+              </dl>
+              <!-- Add support hours here only once confirmed. -->
+            </div>
+
+            <div class="card card-accent">
+              <h2>Want a structured review?</h2>
+              <p>A security assessment starts with an introductory conversation and an agreed scope, then delivers prioritized findings and next steps.</p>
+              <a class="cta cta-primary" href="security-assessment.html">Request a Security Assessment</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/security-logo.svg" width="28" height="28" alt="" /> AI Agents See Security</a>
+            <p class="footer-parent">An AI Agents See company</p>
+            <a class="cta cta-primary cta-small" href="security-assessment.html">Request a Security Assessment</a>
+          </div>
+          <nav class="footer-col" aria-labelledby="footer-services">
+            <h2 class="footer-heading" id="footer-services">Services</h2>
+            <ul>
+              <li><a href="services.html">All services</a></li>
+              <li><a href="email-account-security.html">Email &amp; Account Security</a></li>
+              <li><a href="endpoint-device-security.html">Endpoint &amp; Device Security</a></li>
+              <li><a href="website-ecommerce-security.html">Website &amp; eCommerce Security</a></li>
+              <li><a href="backup-recovery.html">Backup &amp; Recovery</a></li>
+              <li><a href="employee-security-training.html">Employee Security Training</a></li>
+              <li><a href="managed-security-monitoring.html">Managed Security Monitoring</a></li>
+              <li><a href="security-assessment.html">Security Assessment</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="footer-company">
+            <h2 class="footer-heading" id="footer-company">Company</h2>
+            <ul>
+              <li><a href="who-we-help.html">Who We Help</a></li>
+              <li><a href="how-it-works.html">How It Works</a></li>
+              <li><a href="resources.html">Resources</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="footer-legal">
+            <h2 class="footer-heading" id="footer-legal">Legal</h2>
+            <ul>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="terms-of-use.html">Terms of Use</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <p>© <span data-year></span> AI Agents See Security. All rights reserved.</p>
+          <p>Contracting entity: [verified legal entity name to be confirmed]</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
