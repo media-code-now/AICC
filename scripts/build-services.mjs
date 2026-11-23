@@ -4,6 +4,7 @@ import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BRAND, BRAND_LINK, FOOTER } from './partials.mjs';
+import { serviceDiagram } from './service-diagrams.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -460,6 +461,9 @@ function servicePage(s) {
         </div>
       </section>
 ${s.afterIntro || ''}
+  <div class="container service-diagram-wrap">
+    ${serviceDiagram(s.slug)}
+  </div>
       <section class="section" aria-labelledby="problems">
         <div class="container narrow">
           <h2 class="section-title" id="problems">Business problems this service addresses</h2>
@@ -531,7 +535,7 @@ function overviewPage() {
   const cards = services
     .map(
       (s) => `<article class="card service-card reveal">
-              <img class="service-card-image" src="assets/images/services/${s.slug.replace(/\.html$/, '')}.webp" width="768" height="432" alt="" loading="lazy" decoding="async" />
+              ${serviceDiagram(s.slug, true)}
               <h3><a href="${s.slug}">${esc(s.name)}</a></h3>
               <p class="protects"><span>Protects:</span> ${esc(s.protects)}</p>
               <p>${esc(s.intro.split('. ').slice(-1)[0].replace(/^This service /, 'This service '))}</p>

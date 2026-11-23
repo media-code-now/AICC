@@ -80,6 +80,17 @@ try {
   }
 
   const overview = await fetch(`${baseUrl}/services.html`).then((r) => r.text());
+  if ((overview.match(/class="service-diagram service-diagram-compact"/g) || []).length !== 6) {
+    throw new Error('Services overview must include six service diagrams');
+  }
+  const home = await fetch(`${baseUrl}/`).then((r) => r.text());
+  for (const text of ['Client logo placeholder', 'Written permission required', 'Illustrative scenario · not a client case study', 'No completed engagement or measured outcome is claimed.']) {
+    if (!home.includes(text)) throw new Error(`Client proof preview missing disclaimer: ${text}`);
+  }
+  for (const page of ['/', '/contact.html', '/security-assessment.html']) {
+    const html = await fetch(`${baseUrl}${page}`).then((r) => r.text());
+    if (!html.includes('within one business day')) throw new Error(`${page} missing initial reply commitment`);
+  }
   if (!overview.includes('Security services built around your business.')) {
     throw new Error('Services overview missing required headline');
   }
@@ -95,6 +106,9 @@ try {
   const banned = [/24\/7/i, /guarantee(d)? (recovery|protection)/i, /official partner/i, /certified partner/i];
   for (const page of pages.slice(2, 8)) {
     const html = await fetch(`${baseUrl}${page}`).then((r) => r.text());
+    if (!html.includes('class="service-diagram"') || !html.includes('class="diagram-flow" aria-label=')) {
+      throw new Error(`${page} missing accessible service illustration`);
+    }
     for (const s of sections) {
       if (!html.includes(s)) throw new Error(`${page} missing section: ${s}`);
     }

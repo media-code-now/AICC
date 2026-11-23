@@ -2174,3 +2174,191 @@ legend {
     scale: 1.035;
   }
 }
+
+/* Preview proof and educational service flows */
+.reply-note {
+  padding: 0.85rem 1rem;
+  border-left: 3px solid #9fb0ff;
+  border-radius: 0 12px 12px 0;
+  background: rgba(106, 139, 255, 0.1);
+  color: #e9eaff;
+  line-height: 1.6;
+}
+
+.proof-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem;
+}
+
+.proof-slots li {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.proof-slots li > span:last-child {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.proof-symbol {
+  color: #aebcff;
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+.case-preview dt {
+  font-weight: 700;
+  color: #c6cfff;
+  margin-top: 1rem;
+}
+
+.case-preview dd {
+  margin: 0.35rem 0 0;
+  color: var(--text-soft);
+}
+
+.service-diagram-wrap {
+  padding-top: 1.5rem;
+}
+
+.service-diagram {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse at 60% 0%, rgba(107, 61, 240, 0.2), transparent 70%),
+    radial-gradient(rgba(159, 176, 255, 0.13) 1px, transparent 1px),
+    #0c0a26;
+  background-size: auto, 18px 18px, auto;
+}
+
+.service-diagram figcaption {
+  display: grid;
+  gap: 0.4rem;
+  color: #eef0ff;
+}
+
+.diagram-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #aebcff;
+}
+
+.diagram-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.8rem 0;
+}
+
+.diagram-flow li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  text-align: center;
+  color: #eef0ff;
+}
+
+.diagram-flow li + li::before {
+  content: "→";
+  position: absolute;
+  top: 1rem;
+  left: -1.6rem;
+  color: #aebcff;
+}
+
+.diagram-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid #879bff;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 15%, #4b51b2, #141139);
+  box-shadow: 0 0 0 5px rgba(106, 139, 255, 0.08);
+}
+
+.diagram-icon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: none;
+  stroke: #eef0ff;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.diagram-flow li > span:last-child,
+.diagram-note {
+  color: #bfc3e0;
+  font-size: 0.9rem;
+}
+
+.diagram-note {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.service-diagram-compact {
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.service-diagram-compact .diagram-flow {
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  margin: 1.25rem 0;
+}
+
+.service-diagram-compact .diagram-flow li {
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  justify-items: start;
+  text-align: left;
+  column-gap: 0.9rem;
+  row-gap: 0.2rem;
+}
+
+.service-diagram-compact .diagram-icon {
+  grid-row: span 2;
+}
+
+.service-diagram-compact .diagram-flow li + li::before {
+  content: "↓";
+  top: -1.65rem;
+  left: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .proof-slots,
+  .diagram-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .diagram-flow {
+    gap: 2.5rem;
+  }
+
+  .diagram-flow li + li::before {
+    content: "↓";
+    top: -2rem;
+    left: calc(50% - 0.5rem);
+  }
+}
