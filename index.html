@@ -11,6 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/globe.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -34,34 +35,42 @@
     </header>
 
     <main id="main-content">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <p class="kicker">Cybersecurity for SMB teams</p>
-            <h1>Protect operations, accounts, devices, and data with confidence.</h1>
+      <section class="hero globe-hero" aria-labelledby="hero-title">
+        <div class="container globe-hero-layout">
+          <div class="globe-hero-copy">
+            <p class="globe-eyebrow"><span aria-hidden="true"></span> AI Agents See Security</p>
+            <h1 id="hero-title">Your world.<br />Connected.<br /><span>Protected.</span></h1>
             <p class="lead">
-              AI Agents See Security delivers practical, business-focused cybersecurity services for small and medium-sized organizations that need strong protection without unnecessary complexity.
+              Practical cybersecurity for the accounts, people, and systems your business depends on. Clear priorities. A stronger foundation.
             </p>
             <div class="hero-actions">
               <a class="cta cta-primary" href="security-assessment.html">Request a Security Assessment</a>
               <a class="cta cta-secondary" href="contact.html">Book a Consultation</a>
             </div>
+            <p class="globe-hero-note">Built for small and medium-sized businesses.</p>
           </div>
-          <aside class="hero-card" aria-label="Coverage areas">
-            <div class="hero-art hero-art-shield">
-              <img src="assets/images/security-shield.webp" width="1100" height="620" alt="" fetchpriority="high" />
+          <div class="globe-stage">
+            <div class="globe-art" aria-hidden="true">
+              <img class="globe-fallback" src="assets/images/globe-preview.png" width="900" height="900" alt="" fetchpriority="high" />
+              <canvas class="security-globe" width="900" height="900"></canvas>
+              <div class="globe-atmosphere"></div>
+              <canvas class="globe-attacks" width="900" height="900"></canvas>
             </div>
-            <h2>Coverage areas</h2>
-            <ul class="list-clean">
-              <li>Email and account security</li>
-              <li>Endpoint and device security</li>
-              <li>Website and eCommerce security</li>
-              <li>Backup and recovery readiness</li>
-              <li>Employee security training</li>
-              <li>Managed security monitoring</li>
-            </ul>
-          </aside>
+            <div class="globe-caption">
+              <span class="attack-readout" aria-live="off"><strong data-attack-route>New York → London</strong><span data-attack-type>Bot traffic · simulated</span></span>
+            </div>
+            <button class="globe-toggle" type="button" aria-label="Pause globe and threat simulation" hidden></button>
+          </div>
         </div>
+        <nav class="container globe-services" aria-label="Coverage areas">
+          <span class="globe-services-label">What we protect</span>
+          <a href="email-account-security.html">Accounts <span aria-hidden="true">↗</span></a>
+          <a href="endpoint-device-security.html">Devices <span aria-hidden="true">↗</span></a>
+          <a href="website-ecommerce-security.html">Websites <span aria-hidden="true">↗</span></a>
+          <a href="backup-recovery.html">Data <span aria-hidden="true">↗</span></a>
+          <a href="employee-security-training.html">People <span aria-hidden="true">↗</span></a>
+          <a href="managed-security-monitoring.html">Monitoring <span aria-hidden="true">↗</span></a>
+        </nav>
       </section>
 
       <section class="section">
@@ -194,6 +203,7 @@
               <li><a href="who-we-help.html">Who We Help</a></li>
               <li><a href="how-it-works.html">How It Works</a></li>
               <li><a href="resources.html">Resources</a></li>
+              <li><a href="threat-map.html">Threat Map</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="contact.html">Contact</a></li>
             </ul>

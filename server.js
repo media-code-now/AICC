@@ -4,6 +4,8 @@ const path = require('path');
 
 const { validateAssessment } = require('./lib/assessment-validation');
 const { validateContact } = require('./lib/contact-validation');
+const { createThreatFeed } = require('./lib/threat-feed');
+const threatFeed = createThreatFeed();
 
 const root = __dirname;
 const port = Number(process.env.PORT || 8080);
@@ -124,6 +126,13 @@ const server = http.createServer((req, res) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   const pathname = (req.url || '').split('?')[0];
+  if (pathname === '/api/threat-map') {
+    if (req.method !== 'GET') {
+      res.setHeader('Allow', 'GET');
+      return sendJson(res, 405, { message: 'Method not allowed.' });
+    }
+    return threatFeed.read().then(data => sendJson(res, 200, data)).catch(() => sendJson(res, 503, { message: 'Threat feed unavailable.' }));
+  }
   if (pathname === '/api/assessment') {
     return handleForm(req, res, validateAssessment, 'assessment-requests.jsonl');
   }

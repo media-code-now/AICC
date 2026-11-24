@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Threat Map | AI Agents See Security</title>
+    <meta name="description" content="Explore source-attributed threat observations with geographic filters, timestamps, and clear data freshness indicators. Demo data is separately labelled." />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/threat-map.css" />
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/threat-map.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/security-logo.svg" width="28" height="28" alt="" /> AI Agents See Security</a>
+        <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="who-we-help.html">Who We Help</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a class="cta cta-primary cta-small" href="security-assessment.html">Request a Security Assessment</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content">
+      <section class="page-header tm-header">
+        <div class="container">
+          <p class="kicker"><a href="resources.html">Resources</a> / Threat intelligence</p>
+          <h1>Threat Map</h1>
+          <p class="lead">Source-attributed observations. Clear context.<br />See what was reported, where infrastructure was located, and when the data was updated.</p>
+        </div>
+      </section>
+      <section class="section tm-section" aria-label="Threat intelligence explorer" id="threat-explorer">
+        <div class="container">
+          <noscript><p class="notice">JavaScript is required to load observations and use filters. No live threat data is shown without it.</p></noscript>
+          <div class="tm-status-panel">
+            <div>
+              <p class="tm-state" id="tm-state" data-state="unconfigured">No feed loaded</p>
+              <p id="tm-status" role="status">Checking feed availability. No observations are displayed yet.</p>
+            </div>
+            <div class="tm-actions">
+              <button class="cta cta-secondary-dark" id="tm-refresh" type="button" disabled>Refresh feed</button>
+              <button class="cta cta-secondary-dark" id="tm-demo" type="button" disabled>Try demo data</button>
+            </div>
+          </div>
+          <p class="tm-demo-banner" id="tm-demo-banner" hidden><strong>DEMO DATA — FICTIONAL OBSERVATIONS.</strong> These points, priorities, source names and timestamps are examples, not real incidents.</p>
+          <dl class="tm-times">
+            <div><dt>Feed updated (UTC)</dt><dd id="tm-generated">Not available</dd></div>
+            <div><dt>Last server check (UTC)</dt><dd id="tm-checked">Not available</dd></div>
+            <div><dt>Last valid import (UTC)</dt><dd id="tm-success">Not available</dd></div>
+          </dl>
+          <form class="tm-filters" id="tm-filters" aria-label="Filter threat observations">
+            <div class="field"><label for="tm-window">Observation window</label><select id="tm-window" name="window"><option value="24">Last 24 hours</option><option value="1">Last hour</option><option value="168">Last 7 days</option><option value="all">All in snapshot</option></select></div>
+            <div class="field"><label for="tm-category">Category</label><select id="tm-category" name="category"><option value="all">All categories</option><option value="malware">Malware</option><option value="phishing">Phishing</option><option value="bot">Bot activity</option><option value="malicious-infrastructure">Malicious infrastructure</option></select></div>
+            <div class="field"><label for="tm-priority">Source priority</label><select id="tm-priority" name="priority"><option value="all">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option><option value="unknown">Unknown</option></select></div>
+            <div class="field"><label for="tm-source">Source</label><select id="tm-source" name="source"><option value="all">All sources</option></select></div>
+            <div class="field"><label for="tm-search">Search observations</label><input id="tm-search" name="search" type="search" maxlength="160" placeholder="Title or location" /></div>
+            <button class="cta cta-secondary-dark" type="reset">Reset filters</button>
+          </form>
+          <div class="tm-results-heading"><h2 id="tm-map-title">Observation locations</h2><p id="tm-count" role="status">No observations loaded.</p></div>
+          <div class="tm-map" aria-labelledby="tm-map-title">
+            <div class="tm-map-plane">
+              <img src="assets/images/threat-world.svg" width="960" height="480" alt="" />
+              <div id="tm-markers" aria-hidden="true"></div>
+            </div>
+            <p class="tm-map-empty" id="tm-map-empty">Waiting for feed status…</p>
+          </div>
+          <p class="tm-map-note">Points represent approximate infrastructure locations, not attacker identities or routes. Select an observation below for details. Records without coordinates appear only in the list.</p>
+          <div class="tm-workspace">
+            <section aria-labelledby="tm-list-title">
+              <div class="tm-results-heading"><h2 id="tm-list-title">Reported observations</h2><span class="form-note">Newest first · UTC</span></div>
+              <ul class="tm-records" id="tm-records" aria-label="Threat observations"></ul>
+              <p id="tm-list-empty">No observations loaded.</p>
+              <button class="cta cta-secondary-dark" id="tm-more" type="button" hidden>Show more observations</button>
+            </section>
+            <aside class="tm-detail" aria-labelledby="tm-detail-title">
+              <h2 id="tm-detail-title">Observation details</h2>
+              <div id="tm-detail"><p>Select an observation to see its source, time and reported context.</p></div>
+            </aside>
+          </div>
+          <section class="tm-sources" aria-labelledby="tm-sources-title">
+            <h2 id="tm-sources-title">Sources &amp; attribution</h2>
+            <div id="tm-sources"><p>No threat source connected.</p></div>
+            <p class="form-note">Basemap: Natural Earth public-domain geography, packaged by <a href="https://github.com/topojson/world-atlas" target="_blank" rel="noopener noreferrer">World Atlas</a> (ISC). The map is served locally.</p>
+          </section>
+          <div class="notice tm-methodology">
+            <h2>How to read this map</h2>
+            <p>This is a snapshot explorer, not a view of every attack on the internet. Provider priority is not an independent risk assessment. A location can describe hosting infrastructure, a proxy or an approximate geolocation; it does not establish an attacker's physical location.</p>
+            <p>Feed snapshots older than 15 minutes are marked stale. The page checks once per minute while visible. “Current” describes snapshot freshness, not the time an attack is happening. Empty results do not mean an absence of threats. At most 200 observations are included per snapshot.</p>
+            <p>Feed updated is the export's generation time. Last server check is the last attempted file read; last valid import is the last successful read and validation, even if the export was unchanged. Each observation has its own source-reported time. Checking or reimporting an old export does not make it fresh.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/security-logo.svg" width="28" height="28" alt="" /> AI Agents See Security</a>
+            <p class="footer-parent">An AI Agents See company</p>
+            <a class="cta cta-primary cta-small" href="security-assessment.html">Request a Security Assessment</a>
+          </div>
+          <nav class="footer-col" aria-labelledby="footer-services">
+            <h2 class="footer-heading" id="footer-services">Services</h2>
+            <ul>
+              <li><a href="services.html">All services</a></li>
+              <li><a href="email-account-security.html">Email &amp; Account Security</a></li>
+              <li><a href="endpoint-device-security.html">Endpoint &amp; Device Security</a></li>
+              <li><a href="website-ecommerce-security.html">Website &amp; eCommerce Security</a></li>
+              <li><a href="backup-recovery.html">Backup &amp; Recovery</a></li>
+              <li><a href="employee-security-training.html">Employee Security Training</a></li>
+              <li><a href="managed-security-monitoring.html">Managed Security Monitoring</a></li>
+              <li><a href="security-assessment.html">Security Assessment</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="footer-company">
+            <h2 class="footer-heading" id="footer-company">Company</h2>
+            <ul>
+              <li><a href="who-we-help.html">Who We Help</a></li>
+              <li><a href="how-it-works.html">How It Works</a></li>
+              <li><a href="resources.html">Resources</a></li>
+              <li><a href="threat-map.html">Threat Map</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-labelledby="footer-legal">
+            <h2 class="footer-heading" id="footer-legal">Legal</h2>
+            <ul>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="terms-of-use.html">Terms of Use</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <p>© <span data-year></span> AI Agents See Security. All rights reserved.</p>
+          <p>Contracting entity: [verified legal entity name to be confirmed]</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

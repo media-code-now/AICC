@@ -21,7 +21,8 @@ const pages = [
   '/about.html',
   '/contact.html',
   '/privacy-policy.html',
-  '/terms-of-use.html'
+  '/terms-of-use.html',
+  '/threat-map.html'
 ];
 
 const server = spawn('node', ['server.js'], {

@@ -8,7 +8,22 @@
     "dev": "node server.js",
     "build:services": "node scripts/build-services.mjs",
     "build:footer": "node scripts/apply-footer.mjs",
-    "build": "npm run -s build:services && npm run -s build:footer",
-    "test": "node tests/smoke.mjs"
+    "build:globe": "node scripts/build-globe.mjs",
+    "build:threat-map": "node scripts/build-threat-map.mjs",
+    "build": "npm run -s build:services && npm run -s build:footer && npm run -s build:globe && npm run -s build:threat-map",
+    "test": "node tests/smoke.mjs",
+    "test:globe": "node tests/globe-browser.mjs",
+    "test:theme": "node tests/theme-browser.mjs",
+    "test:threat-map": "node tests/threat-map.mjs"
+  },
+  "dependencies": {
+    "cobe": "^0.6.5"
+  },
+  "devDependencies": {
+    "d3-geo": "^3.1.2",
+    "esbuild": "^0.28.2",
+    "playwright": "^1.65.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   }
 }

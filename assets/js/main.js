@@ -35,6 +35,9 @@ for (const span of yearSpans) {
 }
 
 const motionPreference = window.matchMedia('(prefers-reduced-motion: no-preference)');
+motionPreference.addEventListener('change', () => {
+  document.dispatchEvent(new Event('site:motion-change'));
+});
 
 if (motionPreference.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(
@@ -72,3 +75,5 @@ for (const card of document.querySelectorAll('.service-card')) {
     card.style.setProperty('--spotlight-y', `${event.clientY - bounds.top}px`);
   });
 }
+// The homepage globe is isolated in the separately built globe.js bundle.
+
